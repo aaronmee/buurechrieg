@@ -4,7 +4,7 @@ using UnityEngine;
 public class MainDeckScript : MonoBehaviour
 {
     [SerializeField] public List<GameObject> cardPile;
-    //Inputfield for unity
+    //Creates a list wich is named cardPile with every cardobjekt 
     // Start is called before the first frame update
 
     void Start()
