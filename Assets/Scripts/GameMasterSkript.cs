@@ -59,22 +59,20 @@ public class GMSkript : MonoBehaviour
     void AddCardsToWinnerComputer()
     {
         // This function adds the cards of the "activeCards" list to the list "computerPile" and removes them from the "activeCard" list.
-        for (int i = 0; i < activeCards.Count - 1; i ++)
+        foreach (Card elem in activeCards)
         {
-            computerPile.Add(activeCards[0]);
-            activeCards.Remove(activeCards[0]);
+            computerPile.Add(elem);
         }
-
+        activeCards.Clear();
     }
     void AddCardsToWinnerPlayer()
     {
         // This function adds the cards of the "activeCards" list to the list "playerPile" and removes them from the "activeCard" list
-        for (int i = 0; i < activeCards.Count - 1; i++)
+        foreach (Card elem in activeCards)
         {
-            playerPile.Add(activeCards[0]);
-            activeCards.Remove(activeCards[0]);
+            playerPile.Add(elem);
         }
-
+        activeCards.Clear();
     }
 
 
@@ -105,6 +103,7 @@ public class GMSkript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            playerPile.Clear();
             //Checks if the player has pressed the spacebar and makes sure the player can't spam the spacebar.
             if (!hasClicked)
             {
