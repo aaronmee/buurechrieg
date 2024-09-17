@@ -6,9 +6,9 @@ public class MainDeckScript : MonoBehaviour
 {
 
 
-    [SerializeField] public List<int> cardPile;
-    public List<int> playerPile;
-    public List<int> computerPile;
+    [SerializeField] public List<GameObject> cardPile;
+    public List<GameObject> playerPile;
+    public List<GameObject> computerPile;
 
 
 
