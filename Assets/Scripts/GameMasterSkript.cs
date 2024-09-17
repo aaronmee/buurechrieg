@@ -45,7 +45,8 @@ public class GMSkript : MonoBehaviour
     }
     void AddCardsToWinnerComputer()
     {
-        for (int i = 0; i < list.Count - 1; i ++)
+        // This function ads the values of the active cards list to the Computerlist
+        for (int i = 0; i < activeCards.Count - 1; i ++)
         {
             computerPile.Add(activeCards[0]);
             activeCards.Remove(activeCards[0]);
@@ -54,9 +55,10 @@ public class GMSkript : MonoBehaviour
     }
     void AddCardsToWinnerPlayer()
     {
-        for (int i = 0; i < list.Count - 1; i++)
+        // This function ads the values of the active cards list to the Playerlist
+        for (int i = 0; i < activeCards.Count - 1; i++)
         {
-            Pile.Add(activeCards[0]);
+            playerPile.Add(activeCards[0]);
             activeCards.Remove(activeCards[0]);
         }
 
