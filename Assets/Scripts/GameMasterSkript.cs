@@ -12,7 +12,7 @@ public class GMSkript : MonoBehaviour
     bool hasClicked = false;
     bool playerWon = false;
     bool isDraw = false;
-    List<GameObject> activeCards;
+    List<Card> activeCards;
     [SerializeField] public List<GameObject> cardPile;
     [SerializeField] public List<Card> cardSkript;
     public List<Card> playerPile;
@@ -115,17 +115,24 @@ public class GMSkript : MonoBehaviour
         if (playerPile[0].cardData.value > computerPile[0].cardData.value)
         {
             playerWon = true;
+            SaveActiveCards();
+            AddCardsToWinnerPlayer();
             Debug.Log("True");
         }
         else if (playerPile[0].cardData.value < computerPile[0].cardData.value)
         {
             playerWon = false;
             Debug.Log("False");
+            SaveActiveCards();
+            AddCardsToWinnerComputer();
+
         }
         else
         {
             isDraw = true;
             Debug.Log("Draw");
+            SaveActiveCards();
+
         }
     }
 }
