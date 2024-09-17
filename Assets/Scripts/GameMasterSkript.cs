@@ -115,17 +115,24 @@ public class GMSkript : MonoBehaviour
         if (playerPile[0].cardData.value > computerPile[0].cardData.value)
         {
             playerWon = true;
+            SaveActiveCards();
+            AddCardsToWinnerPlayer();
             Debug.Log("True");
         }
         else if (playerPile[0].cardData.value < computerPile[0].cardData.value)
         {
             playerWon = false;
             Debug.Log("False");
+            SaveActiveCards();
+            AddCardsToWinnerComputer();
+
         }
         else
         {
             isDraw = true;
             Debug.Log("Draw");
+            SaveActiveCards();
+
         }
     }
 }
