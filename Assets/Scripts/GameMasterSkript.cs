@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GMSkript : MonoBehaviour
 {
-    [SerializeField] float delay = 1.0f;
+    [SerializeField] float delay = 3.0f;
     [SerializeField] GameObject playerDeck;
     [SerializeField] GameObject computerDeck;
     float timer = 0.0f;
@@ -25,8 +25,8 @@ public class GMSkript : MonoBehaviour
 
     void Shuffle<T>(List<T> list)
     {
-        // Used chatgpt to create this function
-        // Shuffles a given list out of gameobjects
+        // Used chatgpt to create this function.
+        // Shuffles a given list of GameObjects/Scripts.
         System.Random rand = new System.Random();
         for (int i = list.Count - 1; i > 0; i--)
         {
@@ -36,10 +36,10 @@ public class GMSkript : MonoBehaviour
             list[j] = temp;
         }
     }
-     //The first cards of the playerPile and gamePile are added to a list called activeCards
-     //and are removed in the PlayerPile and ComputerPile
+
     void SaveActiveCards()
     {
+        //The first cards of the playerPile and computerPile are removed and added to a list called activeCards.
         activeCards.Add(playerPile[0]);
         playerPile.Remove(playerPile[0]);   
         activeCards.Add(computerPile[0]);
@@ -48,7 +48,7 @@ public class GMSkript : MonoBehaviour
 
     void Seperate<T>(List<T> list)
     {
-        // Evenly seperates a given list out of gameobjects onto the playerPile and the computerPile
+        // Evenly seperates a given list of gameobjects/scripts onto the playerPile and the computerPile.
         for (int i = 0; i < list.Count - 1; i += 2)
         {
             playerPile.Add(cardSkript[i]);
@@ -58,7 +58,7 @@ public class GMSkript : MonoBehaviour
     }
     void AddCardsToWinnerComputer()
     {
-        // This function ads the values of the active cards list to the Computerlist
+        // This function adds the cards of the "activeCards" list to the list "computerPile" and removes them from the "activeCard" list.
         for (int i = 0; i < activeCards.Count - 1; i ++)
         {
             computerPile.Add(activeCards[0]);
@@ -68,7 +68,7 @@ public class GMSkript : MonoBehaviour
     }
     void AddCardsToWinnerPlayer()
     {
-        // This function ads the values of the active cards list to the Playerlist
+        // This function adds the cards of the "activeCards" list to the list "playerPile" and removes them from the "activeCard" list
         for (int i = 0; i < activeCards.Count - 1; i++)
         {
             playerPile.Add(activeCards[0]);
@@ -91,6 +91,7 @@ public class GMSkript : MonoBehaviour
     {   
         if (hasClicked) 
         {
+            //Checkes if the player has pressed the spacebar in the last 3 seconds and sets the boolean hasClicked to false if she didn't.
             if (timer >= delay)
             {
                 hasClicked = false;
@@ -104,16 +105,19 @@ public class GMSkript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //Checks if the player has pressed the spacebar and makes sure the player can't spam the spacebar.
             if (!hasClicked)
             {
-                Debug.Log("Fuck Me");
+                // if it has been more than 3 seconds since the player pressed the spacebar, the function compare gets called.
                 Compare();
                 if (playerPile.Count == 0)
                 {
+                    // checks if the player lost the game and manipulates the boolean gameLost accordingly
                     gameLost = true;
                 }
                 if (computerPile.Count == 0)
                 {
+                    // checks if the player won the game and manipulates the boolean gameWon accordingly
                     gameWon = true;
                 }
             }
@@ -122,20 +126,20 @@ public class GMSkript : MonoBehaviour
 
     void Compare()
     {
-        Debug.Log(playerPile);
-        Debug.Log(playerPile[0].cardData.value);
-        Debug.Log(computerPile[0].cardData.value);
+        // A function that compares the top card of the players deck with the top card of the computers deck and
+        // decides if the player was higher, if the computer was higher or if it was a draw. In case of a draw it
+        // removes the top two cards of both decks, saves them and recurs itself to decide a winner. In case of a
+        // winner, it removes the top card of both decks, saves them and then adds all cards saved this way to the
+        // bottom of the winners deck.
         if (playerPile[0].cardData.value > computerPile[0].cardData.value)
         {
             playerWon = true;
             SaveActiveCards();
             AddCardsToWinnerPlayer();
-            Debug.Log("True");
         }
         else if (playerPile[0].cardData.value < computerPile[0].cardData.value)
         {
             playerWon = false;
-            Debug.Log("False");
             SaveActiveCards();
             AddCardsToWinnerComputer();
 
@@ -143,7 +147,6 @@ public class GMSkript : MonoBehaviour
         else
         {
             isDraw = true;
-            Debug.Log("Draw");
             SaveActiveCards();
             SaveActiveCards();
             Compare();
