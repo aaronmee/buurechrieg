@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManagerSkript : MonoBehaviour
+public class GMSkript : MonoBehaviour
 {
     [SerializeField] float delay = 1.0f;
     [SerializeField] GameObject playerDeck;
