@@ -32,6 +32,13 @@ public class GMSkript : MonoBehaviour
             list[j] = temp;
         }
     }
+    void SaveActiveCards()
+    {
+        activeCards.Add(playerPile[0]);
+        playerPile.Remove(playerPile[0]);   
+        activeCards.Add(computerPile[0]);
+        computerPile.Remove(computerPile[0]);  
+    }
 
     void Seperate<T>(List<T> list)
     {
