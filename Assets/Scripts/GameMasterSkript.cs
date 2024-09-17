@@ -12,11 +12,14 @@ public class GMSkript : MonoBehaviour
     bool hasClicked = false;
     bool playerWon = false;
     bool isDraw = false;
+    bool gameWon = false;
+    bool gameLost = false;
     List<Card> activeCards;
     [SerializeField] public List<GameObject> cardPile;
     [SerializeField] public List<Card> cardSkript;
     public List<Card> playerPile;
     public List<Card> computerPile;
+
 
 
 
@@ -103,6 +106,14 @@ public class GMSkript : MonoBehaviour
             {
                 Debug.Log("Fuck Me");
                 Compare();
+                if (playerPile.Count == 0)
+                {
+                    gameLost = true;
+                }
+                if (computerPile.Count == 0)
+                {
+                    gameWon = true;
+                }
             }
         }
     }
