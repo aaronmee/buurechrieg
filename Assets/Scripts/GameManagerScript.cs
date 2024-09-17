@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GMSkript : MonoBehaviour
+public class GameManagerSkript : MonoBehaviour
 {
     [SerializeField] float delay = 1.0f;
     [SerializeField] GameObject playerDeck;
@@ -43,6 +43,25 @@ public class GMSkript : MonoBehaviour
         }
 
     }
+    void AddCardsToWinnerComputer()
+    {
+        for (int i = 0; i < list.Count - 1; i ++)
+        {
+            computerPile.Add(activeCards[0]);
+            activeCards.Remove(activeCards[0]);
+        }
+
+    }
+    void AddCardsToWinnerPlayer()
+    {
+        for (int i = 0; i < list.Count - 1; i++)
+        {
+            Pile.Add(activeCards[0]);
+            activeCards.Remove(activeCards[0]);
+        }
+
+    }
+
 
     // Start is called before the first frame update
     void Start()
