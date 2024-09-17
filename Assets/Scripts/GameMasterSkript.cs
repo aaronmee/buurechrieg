@@ -50,6 +50,27 @@ public class GMSkript : MonoBehaviour
         }
 
     }
+    void AddCardsToWinnerComputer()
+    {
+        // This function ads the values of the active cards list to the Computerlist
+        for (int i = 0; i < activeCards.Count - 1; i ++)
+        {
+            computerPile.Add(activeCards[0]);
+            activeCards.Remove(activeCards[0]);
+        }
+
+    }
+    void AddCardsToWinnerPlayer()
+    {
+        // This function ads the values of the active cards list to the Playerlist
+        for (int i = 0; i < activeCards.Count - 1; i++)
+        {
+            playerPile.Add(activeCards[0]);
+            activeCards.Remove(activeCards[0]);
+        }
+
+    }
+
 
     // Start is called before the first frame update
     void Start()
