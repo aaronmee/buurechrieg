@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 382.49 96.47">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e9e0c4;
+        stroke: #1e1e1c;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+      }
+
+      .cls-2 {
+        fill: #1d1d1b;
+        font-family: ArialRoundedMTBold, 'Arial Rounded MT Bold';
+        font-size: 48px;
+      }
+    </style>
+  </defs>
+  <g id="Ebene_1-2" data-name="Ebene_1">
+    <g id="Ebene_1-2">
+      <rect class="cls-1" x="2" y="2" width="378.49" height="92.47" rx="34.95" ry="34.95"/>
+    </g>
+    <text class="cls-2" transform="translate(86.03 66.11)"><tspan x="0" y="0">Anleitung</tspan></text>
+  </g>
+</svg>
