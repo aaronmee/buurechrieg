@@ -36,6 +36,8 @@ public class GMSkript : MonoBehaviour
             list[j] = temp;
         }
     }
+     //The first cards of the playerPile and gamePile are added to a list called activeCards
+     //and are removed in the PlayerPile and ComputerPile
     void SaveActiveCards()
     {
         activeCards.Add(playerPile[0]);
@@ -86,7 +88,7 @@ public class GMSkript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         if (hasClicked) 
         {
             if (timer >= delay)
@@ -143,6 +145,8 @@ public class GMSkript : MonoBehaviour
             isDraw = true;
             Debug.Log("Draw");
             SaveActiveCards();
+            SaveActiveCards();
+            Compare();
 
         }
     }
