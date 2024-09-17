@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GMSkript : MonoBehaviour
@@ -12,10 +13,10 @@ public class GMSkript : MonoBehaviour
     bool playerWon = false;
     bool isDraw = false;
     List<GameObject> activeCards;
-
     [SerializeField] public List<GameObject> cardPile;
-    public List<GameObject> playerPile;
-    public List<GameObject> computerPile;
+    [SerializeField] public List<Card> cardSkript;
+    public List<Card> playerPile;
+    public List<Card> computerPile;
 
 
 
@@ -38,8 +39,8 @@ public class GMSkript : MonoBehaviour
         // Evenly seperates a given list out of gameobjects onto the playerPile and the computerPile
         for (int i = 0; i < list.Count - 1; i += 2)
         {
-            playerPile.Add(cardPile[i]);
-            computerPile.Add(cardPile[i + 1]);
+            playerPile.Add(cardSkript[i]);
+            computerPile.Add(cardSkript[i + 1]);
         }
 
     }
@@ -48,13 +49,55 @@ public class GMSkript : MonoBehaviour
     void Start()
     {
         // Shuffles and separates the cardPile
-        Shuffle(cardPile);
-        Seperate(cardPile);
+        Shuffle(cardSkript);
+        Seperate(cardSkript);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (hasClicked) 
+        {
+            if (timer >= delay)
+            {
+                hasClicked = false;
+                timer = 0;
+            }
+            else
+            {
+                timer = timer + Time.deltaTime;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!hasClicked)
+            {
+                Debug.Log("Fuck Me");
+                Compare();
+            }
+        }
+    }
+
+    void Compare()
+    {
+        Debug.Log(playerPile);
+        Debug.Log(playerPile[0].cardData.value);
+        Debug.Log(computerPile[0].cardData.value);
+        if (playerPile[0].cardData.value > computerPile[0].cardData.value)
+        {
+            playerWon = true;
+            Debug.Log("True");
+        }
+        else if (playerPile[0].cardData.value < computerPile[0].cardData.value)
+        {
+            playerWon = false;
+            Debug.Log("False");
+        }
+        else
+        {
+            isDraw = true;
+            Debug.Log("Draw");
+        }
     }
 }
