@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class MainDeckScript : MonoBehaviour
 {
+
+
     [SerializeField] public List<GameObject> cardPile;
-    //Creates a list wich is named cardPile with every cardobjekt 
-    // Start is called before the first frame update
+    public List<GameObject> playerPile;
+    public List<GameObject> computerPile;
+
+
+
     void Shuffle<T>(List<T> list)
     {
+        // Used chatgpt to create this function
+        // Shuffles a given list out of gameobjects
         System.Random rand = new System.Random();
         for (int i = list.Count - 1; i > 0; i--)
         {
@@ -18,11 +25,25 @@ public class MainDeckScript : MonoBehaviour
             list[j] = temp;
         }
     }
-    //Used chatgpt to create this function
+
+    void Seperate<T>(List<T> list)
+    {
+        // Evenly seperates a given list out of gameobjects onto the playerPile and the computerPile
+        for (int i = 0; i < list.Count - 1; i += 2)
+        {
+            playerPile.Add(cardPile[i]);
+            computerPile.Add(cardPile[i + 1]);
+        }
+
+    }
+
+
     void Start()
     {
+        // Shuffles and separates the cardPile
         Shuffle(cardPile);
-        //when the programm starts the list gets schouffled.
+        Seperate(cardPile);
+
     }
 
 
@@ -32,3 +53,4 @@ public class MainDeckScript : MonoBehaviour
 
     }
 }
+
