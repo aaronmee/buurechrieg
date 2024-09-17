@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    [SerializeField] public float value = 0;
     [SerializeField] public CardData cardData;
-    //Option to give the Variable 'value' a value in Unity.
+    // Tells Unity that the Card GameObjects have scriptable objects of the type CardData.
     // Start is called before the first frame update
     void Start()
     {
