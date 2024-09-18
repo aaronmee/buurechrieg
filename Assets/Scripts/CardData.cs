@@ -12,4 +12,5 @@ public class CardData : ScriptableObject
     public Sprite frontCardImage;
     public Sprite backCardImage;
     public bool owner;
+    public bool isTribut = false;
 }
