@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardData: {fileID: 0}
+  back: {fileID: 5694663851040986528}
+  front: {fileID: 2687994602326669555}
 --- !u!1 &5443617865045553787
 GameObject:
   m_ObjectHideFlags: 0

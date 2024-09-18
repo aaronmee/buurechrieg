@@ -17,3 +17,4 @@ MonoBehaviour:
   frontCardImage: {fileID: 0}
   backCardImage: {fileID: 0}
   owner: 0
+  isTribut: 0
