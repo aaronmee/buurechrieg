@@ -63,7 +63,7 @@ public class GameMasterSkript: MonoBehaviour
         {
             computerPile.Add(card);
         }
-        activeCards.Cloear();
+        activeCards.Clear();
     }
 
     void AddCardsToWinnerPlayer()
