@@ -15,8 +15,7 @@ public class GameManager: MonoBehaviour
     bool gameWon = false;
     bool gameLost = false;
     [SerializeField] List<Card> activeCards = new();
-    [SerializeField] public List<GameObject> cardPile;
-    [SerializeField] public List<Card> cardSkript;
+    [SerializeField] public List<Card> cardPile;
     public List<Card> playerPile;
     public List<Card> computerPile;
 
@@ -51,8 +50,8 @@ public class GameManager: MonoBehaviour
         // Evenly seperates a given list of gameobjects/scripts onto the playerPile and the computerPile.
         for (int i = 0; i < list.Count; i += 2)
         {
-            playerPile.Add(cardSkript[i]);
-            computerPile.Add(cardSkript[i + 1]);
+            playerPile.Add(cardPile[i]);
+            computerPile.Add(cardPile[i + 1]);
         }
 
     }
@@ -81,8 +80,8 @@ public class GameManager: MonoBehaviour
     void Start()
     {
         // Shuffles and separates the cardPile
-        Shuffle(cardSkript);
-        Seperate(cardSkript);
+        Shuffle(cardPile);
+        Seperate(cardPile);
     }
 
     // Update is called once per frame
