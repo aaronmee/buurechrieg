@@ -227,7 +227,7 @@ public class GameManager: MonoBehaviour
         }
     }
 
-    private static readonly Vector3 playerDeckPosition = new Vector3(7, 0, 0);
+    public static readonly Vector3 playerDeckPosition = new Vector3(7, 0, 0);
     private static readonly Vector3 computerDeckPosition = new Vector3(-7, 0, 0);
 
     private static readonly Vector3 playerPilePosition = new Vector3(2.5f, 0f, 0f);
