@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GMSkript : MonoBehaviour
+public class GameMasterSkript: MonoBehaviour
 {
     [SerializeField] float delay = 3.0f;
     [SerializeField] GameObject playerDeck;
@@ -14,7 +14,7 @@ public class GMSkript : MonoBehaviour
     bool isDraw = false;
     bool gameWon = false;
     bool gameLost = false;
-    List<Card> activeCards;
+    [SerializeField] List<Card> activeCards;
     [SerializeField] public List<GameObject> cardPile;
     [SerializeField] public List<Card> cardSkript;
     public List<Card> playerPile;
@@ -41,15 +41,17 @@ public class GMSkript : MonoBehaviour
     {
         //The first cards of the playerPile and computerPile are removed and added to a list called activeCards.
         activeCards.Add(playerPile[0]);
-        playerPile.Remove(playerPile[0]);   
+        playerPile.Remove(playerPile[0]);
+        Debug.Log(activeCards.Count);
         activeCards.Add(computerPile[0]);
-        computerPile.Remove(computerPile[0]);  
+        computerPile.Remove(computerPile[0]);
+        Debug.Log(activeCards.Count);
     }
 
     void Seperate<T>(List<T> list)
     {
         // Evenly seperates a given list of gameobjects/scripts onto the playerPile and the computerPile.
-        for (int i = 0; i < list.Count - 1; i += 2)
+        for (int i = 0; i < list.Count; i += 2)
         {
             playerPile.Add(cardSkript[i]);
             computerPile.Add(cardSkript[i + 1]);
@@ -59,20 +61,22 @@ public class GMSkript : MonoBehaviour
     void AddCardsToWinnerComputer()
     {
         // This function adds the cards of the "activeCards" list to the list "computerPile" and removes them from the "activeCard" list.
-        for (int i = 0; i < activeCards.Count - 1; i ++)
+        for (int i = -1; i < activeCards.Count; i ++) // mit while loop ersetzen
         {
             computerPile.Add(activeCards[0]);
             activeCards.Remove(activeCards[0]);
+            Debug.Log(activeCards.Count);
         }
-
     }
+
     void AddCardsToWinnerPlayer()
     {
         // This function adds the cards of the "activeCards" list to the list "playerPile" and removes them from the "activeCard" list
-        for (int i = 0; i < activeCards.Count - 1; i++)
+        for (int i = -1; i < activeCards.Count; i++)
         {
             playerPile.Add(activeCards[0]);
             activeCards.Remove(activeCards[0]);
+            Debug.Log(activeCards.Count);
         }
 
     }
@@ -105,52 +109,62 @@ public class GMSkript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Checks if the player has pressed the spacebar and makes sure the player can't spam the spacebar.
+                // Checks if the player has pressed the spacebar and makes sure the player can't spam the spacebar.
             if (!hasClicked)
             {
                 // if it has been more than 3 seconds since the player pressed the spacebar, the function compare gets called.
                 Compare();
-                if (playerPile.Count == 0)
-                {
-                    // checks if the player lost the game and manipulates the boolean gameLost accordingly
-                    gameLost = true;
-                }
-                if (computerPile.Count == 0)
-                {
-                    // checks if the player won the game and manipulates the boolean gameWon accordingly
-                    gameWon = true;
-                }
             }
         }
     }
 
     void Compare()
     {
+        if (playerPile.Count == 0)
+        {
+            // checks if the player lost the game and manipulates the boolean gameLost accordingly
+            gameLost = true;
+            Debug.Log("Player lost the Game");
+        }
+        if (computerPile.Count == 0)
+        {
+            // checks if the player won the game and manipulates the boolean gameWon accordingly
+            gameWon = true;
+            Debug.Log("Player won the Game");
+        }
         // A function that compares the top card of the players deck with the top card of the computers deck and
         // decides if the player was higher, if the computer was higher or if it was a draw. In case of a draw it
         // removes the top two cards of both decks, saves them and recurs itself to decide a winner. In case of a
         // winner, it removes the top card of both decks, saves them and then adds all cards saved this way to the
         // bottom of the winners deck.
-        if (playerPile[0].cardData.value > computerPile[0].cardData.value)
+        if (gameWon == false && gameLost == false)
         {
-            playerWon = true;
-            SaveActiveCards();
-            AddCardsToWinnerPlayer();
-        }
-        else if (playerPile[0].cardData.value < computerPile[0].cardData.value)
-        {
-            playerWon = false;
-            SaveActiveCards();
-            AddCardsToWinnerComputer();
+            Debug.Log(playerPile[0]);
+            Debug.Log(computerPile[0]);
+            if (playerPile[0].cardData.value > computerPile[0].cardData.value)
+            {
+                Debug.Log("Player Won comparison");
+                playerWon = true;
+                SaveActiveCards();
+                AddCardsToWinnerPlayer();
+            }
+            else if (playerPile[0].cardData.value < computerPile[0].cardData.value)
+            {
+                Debug.Log("Player lost comparison");
+                playerWon = false;
+                SaveActiveCards();
+                AddCardsToWinnerComputer();
 
-        }
-        else
-        {
-            isDraw = true;
-            SaveActiveCards();
-            SaveActiveCards();
-            Compare();
+            }
+            else
+            {
+                Debug.Log("It was a Draw");
+                isDraw = true;
+                SaveActiveCards();
+                SaveActiveCards();
+                Compare();
 
+            }
         }
     }
 }
