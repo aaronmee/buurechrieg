@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameMasterSkript: MonoBehaviour
+public class GameManager: MonoBehaviour
 {
     [SerializeField] float delay = 3.0f;
     [SerializeField] GameObject playerDeck;
