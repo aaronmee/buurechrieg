@@ -41,9 +41,9 @@ public class GameMasterSkript: MonoBehaviour
     {
         //The first cards of the playerPile and computerPile are removed and added to a list called activeCards.
         activeCards.Add(playerPile[0]);
-        playerPile.Remove(playerPile[0]);
+        playerPile.RemoveAt(0);
         activeCards.Add(computerPile[0]);
-        computerPile.Remove(computerPile[0]);
+        computerPile.RemoveAt(0);
     }
 
     void Seperate<T>(List<T> list)
@@ -59,22 +59,21 @@ public class GameMasterSkript: MonoBehaviour
     void AddCardsToWinnerComputer()
     {
         // This function adds the cards of the "activeCards" list to the list "computerPile" and removes them from the "activeCard" list.
-        for (int i = -1; i < activeCards.Count; i ++) // mit while loop ersetzen
+        foreach (Card card in activeCards)
         {
-            computerPile.Add(activeCards[0]);
-            activeCards.Remove(activeCards[0]);
+            computerPile.Add(card);
         }
+        activeCards.Cloear();
     }
 
     void AddCardsToWinnerPlayer()
     {
         // This function adds the cards of the "activeCards" list to the list "playerPile" and removes them from the "activeCard" list
-        for (int i = -1; i < activeCards.Count; i++)
+        foreach (Card card in activeCards)
         {
-            playerPile.Add(activeCards[0]);
-            activeCards.Remove(activeCards[0]);
+            playerPile.Add(card);
         }
-
+        activeCards.Clear();
     }
 
 
