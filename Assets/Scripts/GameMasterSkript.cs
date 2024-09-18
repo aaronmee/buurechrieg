@@ -42,10 +42,8 @@ public class GameMasterSkript: MonoBehaviour
         //The first cards of the playerPile and computerPile are removed and added to a list called activeCards.
         activeCards.Add(playerPile[0]);
         playerPile.Remove(playerPile[0]);
-        Debug.Log(activeCards.Count);
         activeCards.Add(computerPile[0]);
         computerPile.Remove(computerPile[0]);
-        Debug.Log(activeCards.Count);
     }
 
     void Seperate<T>(List<T> list)
@@ -65,7 +63,6 @@ public class GameMasterSkript: MonoBehaviour
         {
             computerPile.Add(activeCards[0]);
             activeCards.Remove(activeCards[0]);
-            Debug.Log(activeCards.Count);
         }
     }
 
@@ -76,7 +73,6 @@ public class GameMasterSkript: MonoBehaviour
         {
             playerPile.Add(activeCards[0]);
             activeCards.Remove(activeCards[0]);
-            Debug.Log(activeCards.Count);
         }
 
     }
