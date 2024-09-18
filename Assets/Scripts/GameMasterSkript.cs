@@ -14,7 +14,7 @@ public class GMSkript : MonoBehaviour
     bool isDraw = false;
     bool gameWon = false;
     bool gameLost = false;
-    List<Card> activeCards;
+    List<Card> activeCards = new();
     [SerializeField] public List<GameObject> cardPile;
     [SerializeField] public List<Card> cardSkript;
     public List<Card> playerPile;
@@ -41,9 +41,9 @@ public class GMSkript : MonoBehaviour
     {
         //The first cards of the playerPile and computerPile are removed and added to a list called activeCards.
         activeCards.Add(playerPile[0]);
-        playerPile.Remove(playerPile[0]);   
+        playerPile.RemoveAt(0);
         activeCards.Add(computerPile[0]);
-        computerPile.Remove(computerPile[0]);  
+        computerPile.RemoveAt(0);
     }
 
     void Seperate<T>(List<T> list)
@@ -59,18 +59,18 @@ public class GMSkript : MonoBehaviour
     void AddCardsToWinnerComputer()
     {
         // This function adds the cards of the "activeCards" list to the list "computerPile" and removes them from the "activeCard" list.
-        foreach (Card elem in activeCards)
+        foreach (Card card in activeCards)
         {
-            computerPile.Add(elem);
+            computerPile.Add(card);
         }
         activeCards.Clear();
     }
     void AddCardsToWinnerPlayer()
     {
         // This function adds the cards of the "activeCards" list to the list "playerPile" and removes them from the "activeCard" list
-        foreach (Card elem in activeCards)
+        foreach (Card card in activeCards)
         {
-            playerPile.Add(elem);
+            playerPile.Add(card);
         }
         activeCards.Clear();
     }
@@ -103,7 +103,6 @@ public class GMSkript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            playerPile.Clear();
             //Checks if the player has pressed the spacebar and makes sure the player can't spam the spacebar.
             if (!hasClicked)
             {
