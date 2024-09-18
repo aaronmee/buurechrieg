@@ -20,8 +20,44 @@ public class GameManager: MonoBehaviour
     public List<Card> computerPile;
 
 
+    void definePlayerAttribute()
+    {
+        //for every card in playerPile the attribute owner gets true.
+        foreach (Card card in playerPile)
+        {
+            card.cardData.owner = true;
+        }
 
+    }
 
+    void definePlayerAttributeActivecards()
+    {
+        //for every card in activeCards the attribute owner gets true.
+        foreach (Card card in activeCards)
+        {
+            card.cardData.owner = true;
+        }
+
+    }
+
+    void defineComputerAttribute()
+    {
+        //for every card in computerPile the attribute owner gets false.
+        foreach (Card card in computerPile)
+        {
+            card.cardData.owner = false;
+        }
+    }
+
+    void defineComputerAttributeActiveCards()
+    {
+        //for every card in activeCards the attribute owner gets false.
+        foreach (Card card in activeCards)
+        {
+            card.cardData.owner = false;
+        }
+
+    }
     void Shuffle<T>(List<T> list)
     {
         // Used chatgpt to create this function.
@@ -58,6 +94,7 @@ public class GameManager: MonoBehaviour
     void AddCardsToWinnerComputer()
     {
         // This function adds the cards of the "activeCards" list to the list "computerPile" and removes them from the "activeCard" list.
+        defineComputerAttributeActiveCards();
         foreach (Card card in activeCards)
         {
             computerPile.Add(card);
@@ -68,6 +105,7 @@ public class GameManager: MonoBehaviour
     void AddCardsToWinnerPlayer()
     {
         // This function adds the cards of the "activeCards" list to the list "playerPile" and removes them from the "activeCard" list
+        definePlayerAttributeActivecards();
         foreach (Card card in activeCards)
         {
             playerPile.Add(card);
@@ -82,6 +120,8 @@ public class GameManager: MonoBehaviour
         // Shuffles and separates the cardPile
         Shuffle(cardPile);
         Seperate(cardPile);
+        defineComputerAttribute();
+        definePlayerAttribute();
     }
 
     // Update is called once per frame
