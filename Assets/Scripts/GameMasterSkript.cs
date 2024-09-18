@@ -14,7 +14,7 @@ public class GMSkript : MonoBehaviour
     bool isDraw = false;
     bool gameWon = false;
     bool gameLost = false;
-    List<Card> activeCards = new();
+    [SerializeField] List<Card> activeCards = new();
     [SerializeField] public List<GameObject> cardPile;
     [SerializeField] public List<Card> cardSkript;
     public List<Card> playerPile;
