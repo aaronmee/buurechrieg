@@ -13,7 +13,7 @@ public class VectorTest
     public void VectorPlayerDeckPositionTest()
     // The Function tests if the vector in the first part of the brackets equals the vector in the second part of the brackets. The output is True or False
     {
-        Assert.AreEqual(expected: new Vector3(x: 7, y: 0, z:0), actual: GameManager.playerDeckPosition);
+        Assert.AreEqual(expected: new Vector3(-5.7f, -3.4f, 0f), actual: GameManager.playerDeckPosition);
     }
 
 
@@ -22,7 +22,7 @@ public class VectorTest
     public void VectorComputerDeckPositionTest()
     // The Function tests if the vector in the first part of the brackets equals the vector in the second part of the brackets. The output is True or False
     {
-        Assert.AreEqual(new Vector3(x: -7, y: 0, z: 0), GameManager.computerDeckPosition);
+        Assert.AreEqual(new Vector3(5.7f, -3.4f, 0f), GameManager.computerDeckPosition);
     }
 
     [Test]
@@ -30,7 +30,7 @@ public class VectorTest
     public void VectorPlayerPilePositionTest()
     // The Function tests if the vector in the first part of the brackets equals the vector in the second part of the brackets. The output is True or False
     {
-        Assert.AreEqual(new Vector3(x: 2.5f, y: 0, z: 0), GameManager.playerPilePosition);
+        Assert.AreEqual(new Vector3(x: -2.5f, y: 0, z: 0), GameManager.playerPilePosition);
     }
 
     [Test]
@@ -38,6 +38,6 @@ public class VectorTest
     public void VectorComputerPilePositionTest()
         // The Function tests if the vector in the first part of the brackets equals the vector in the second part of the brackets. The output is True or False
     {
-        Assert.AreEqual(new Vector3(x: -2.5f, y: 0, z: 0), GameManager.computerPilePosition);
+        Assert.AreEqual(new Vector3(x: 2.5f, y: 0, z: 0), GameManager.computerPilePosition);
     }
 }
