@@ -27,6 +27,7 @@ public class GameManager: MonoBehaviour
     public Vector3 staticAdder = new(0f, 0.7f, -1f);
 
 
+
     public void definePlayerAttribute()
     {
         //for every card in playerPile the attribute owner gets true.
