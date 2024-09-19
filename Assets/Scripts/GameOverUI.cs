@@ -1,37 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
 
+
     [SerializeField] private GameObject victoryScreen;
     [SerializeField] private GameObject defeatScreen;
 
+    [SerializeField] private Button mainMenuButton1;
+    [SerializeField] private Button mainMenuButton2;
 
 
     private void Awake()
     {
-        // Enables the Victory and Defeat Event Listeners and disables the Victory and Defeat Screens.
-        // GameManager.Instance.OnPlayerVictory += ...
-        // GameManager.Instance.OnPlayerDefeat += ...
+        // Disable Victory and Defeat screen
+        victoryScreen.SetActive(false);
+        defeatScreen.SetActive(false);
 
-        // victoryScreen.SetActive(false);
-        // defeatScreen.SetActive(false);
+        // Go back to Main Menu when Buttons are clicked
+        mainMenuButton1.onClick.AddListener(() => SceneManager.LoadScene("MainMenuScene"));
+        mainMenuButton2.onClick.AddListener(() => SceneManager.LoadScene("MainMenuScene"));
     }
 
-    private void OnPlayerWon()
+    private void Update()
     {
-        // Enables the Victory Screen if the player has won the game.
-        // victoryScreen.SetActive(true);
+        // Enable the Victory screen if the player won, and the Defeat screen if the player lost
+        if (GameManager.Instance.playerPile.Count == 0)
+        { 
+            defeatScreen.SetActive(true);
+        }
+        if (GameManager.Instance.computerPile.Count == 0)
+        {
+            victoryScreen.SetActive(true);
+        }
     }
-
-    private void OnPlayerLost()
-    {
-        // Enables the Defeat Screen if the player has lost the game.
-        // defeatScreen.SetActive(true);
-    }
-
 
 
 }
