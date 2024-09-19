@@ -35,6 +35,17 @@ public class GameManager: MonoBehaviour
     public static GameManager Instance;
 
 
+    public static readonly Vector3 playerDeckPosition = new Vector3(-5.7f, -3.4f, 0f);
+    public static readonly Vector3 computerDeckPosition = new Vector3(5.7f, -3.4f, 0f);
+
+    public static readonly Vector3 playerPilePosition = new Vector3(-2.5f, 0f, 0f);
+    public static readonly Vector3 computerPilePosition = new Vector3(2.5f, 0f, 0f);
+
+    private Tweener tweenScale;
+    private Tweener tweenMove;
+    private bool isFaceUp;
+
+
     private void Awake()
     {
         // Function that is called before the game starts. 
@@ -304,16 +315,8 @@ public class GameManager: MonoBehaviour
         }
     }
 
-    public static readonly Vector3 playerDeckPosition = new Vector3(7, 0, 0);
-    public static readonly Vector3 computerDeckPosition = new Vector3(-7, 0, 0);
-
-    public static readonly Vector3 playerPilePosition = new Vector3(2.5f, 0f, 0f);
-    public static readonly Vector3 computerPilePosition = new Vector3(-2.5f, 0f, 0f);
 
 
-    private Tweener tweenScale;
-    private Tweener tweenMove;
-    private bool isFaceUp;
 
     public void InitPosition(bool ownerIsPlayer, Card card)
     {
