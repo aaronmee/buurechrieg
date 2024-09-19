@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Threading;
+
 
 public class GameManager: MonoBehaviour
 {
-    [SerializeField] float delay = 3.0f;
+    [SerializeField] float clickDelay = 3.0f;
+    [SerializeField] int animationDelay = 1;
     [SerializeField] GameObject playerDeck;
     [SerializeField] GameObject computerDeck;
     float timer = 0.0f;
@@ -37,6 +40,7 @@ public class GameManager: MonoBehaviour
         foreach (Card card in activeCards)
         {
             card.cardData.owner = true;
+            InitPosition(card.cardData.owner, card);
         }
 
     }
@@ -47,6 +51,7 @@ public class GameManager: MonoBehaviour
         foreach (Card card in computerPile)
         {
             card.cardData.owner = false;
+            InitPosition(card.cardData.owner, card);
         }
     }
 
@@ -99,6 +104,15 @@ public class GameManager: MonoBehaviour
         foreach (Card card in activeCards)
         {
             computerPile.Add(card);
+            Thread.Sleep(animationDelay);
+            if (card.cardData.isTribut)
+            {
+                card.AnimateComputerToDeckDraw();
+            }
+            else
+            {
+                card.AnimateComputerToDeck();
+            }
         }
         activeCards.Clear();
     }
@@ -110,6 +124,15 @@ public class GameManager: MonoBehaviour
         foreach (Card card in activeCards)
         {
             playerPile.Add(card);
+            Thread.Sleep(animationDelay);
+            if (card.cardData.isTribut)
+            {
+                card.AnimatePlayerToDeckDraw();
+            }
+            else 
+            {
+                card.AnimatePlayerToDeck();
+            }
         }
         activeCards.Clear();
     }
@@ -131,7 +154,7 @@ public class GameManager: MonoBehaviour
         if (hasClicked) 
         {
             //Checkes if the player has pressed the spacebar in the last 3 seconds and sets the boolean hasClicked to false if she didn't.
-            if (timer >= delay)
+            if (timer >= clickDelay)
             {
                 hasClicked = false;
                 timer = 0;
@@ -148,6 +171,8 @@ public class GameManager: MonoBehaviour
             if (!hasClicked)
             {
                 // if it has been more than 3 seconds since the player pressed the spacebar, the function compare gets called.
+                playerPile[0].AnimatePlayerToPile();
+                computerPile[0].AnimateComputerToPile();
                 Compare();
             }
         }
@@ -189,154 +214,41 @@ public class GameManager: MonoBehaviour
                 playerWon = false;
                 SaveActiveCards();
                 AddCardsToWinnerComputer();
-
             }
             else
             {
                 Debug.Log("It was a Draw");
                 isDraw = true;
                 SaveActiveCards();
+                playerPile[0].AnimatePlayerToPileDraw();
+                computerPile[0].AnimatePlayerToPileDraw();
                 SaveActiveCards();
-                Compare();
-
             }
         }
     }
-    [SerializeField]
-    private SpriteRenderer back;
 
-    [SerializeField]
-    private SpriteRenderer front;
+    private static readonly Vector3 playerDeckPosition = new Vector3(7, 0, 0);
+    private static readonly Vector3 computerDeckPosition = new Vector3(-7, 0, 0);
 
+    private static readonly Vector3 playerPilePosition = new Vector3(2.5f, 0f, 0f);
+    private static readonly Vector3 computerPilePosition = new Vector3(-2.5f, 0f, 0f);
 
-    private static readonly Vector3 playerPilePosition = new Vector3(-4, 0, 0);
-    private static readonly Vector3 computerPilePosition = new Vector3(4, 0, 0);
-
-    private static readonly Vector3 playerCardMovePosition = new Vector3(-1.4f, 0.8f, 0f);
-    private static readonly Vector3 computerCardMovePosition = new Vector3(1.4f, 0.8f, 0f);
-
-    private const float MoveAnimationDuration = 0.7f;
-    private const float FlipAnimationDuration = 0.35f;
 
     private Tweener tweenScale;
     private Tweener tweenMove;
     private bool isFaceUp;
 
-
-
-    private void Awake()
-    {
-        Transform transform = gameObject.transform;
-        isFaceUp = false;
-        back.gameObject.SetActive(false);
-        front.gameObject.SetActive(false);
-    }
-    public void InitPosition(bool ownerIsPlayer)
+    public void InitPosition(bool ownerIsPlayer, Card card)
     {
         // Sets the card's potition, depending on who the owner is
         switch (ownerIsPlayer)
         {
             case true:
-                transform.position = playerPilePosition;
+                card.transform.position = playerPilePosition;
                 break;
             case false:
-                transform.position = computerPilePosition;
+                card.transform.position = computerPilePosition;
                 break;
         }
-    }
-
-    private void AnimatePlayer()
-    {
-        StartCoroutine(AnimatePlayerMove());
-        StartCoroutine(AnimateFlip());
-    }
-
-    private void AnimateComputer()
-    {
-        StartCoroutine(AnimateComputerMove());
-        StartCoroutine(AnimateFlip());
-    }
-
-
-    private IEnumerator AnimatePlayerMove()
-    {
-
-        if (tweenMove == null)
-            tweenMove = transform
-                .DOMove(playerCardMovePosition, MoveAnimationDuration)
-                .SetEase(Ease.Linear)
-                .SetAutoKill(false)
-                .OnComplete(() => OnPlayerMoveComplete());
-
-        else
-            tweenMove.Restart();
-
-        yield return tweenMove.WaitForCompletion();
-    }
-
-    private IEnumerator AnimateComputerMove()
-    {
-
-        if (tweenMove == null)
-            tweenMove = transform
-                .DOMove(computerCardMovePosition, MoveAnimationDuration)
-                .SetEase(Ease.Linear)
-                .SetAutoKill(false)
-                .OnComplete(() => OnComputerMoveComplete());
-
-        else
-            tweenMove.Restart();
-
-        yield return tweenMove.WaitForCompletion();
-    }
-
-
-    private IEnumerator AnimateFlip()
-    {
-        // Scale X from 1 to 0 then back to 1 again,
-        // switching between front and back sprites in the middle.
-        // This gives the illusion of flipping the card in 2D.
-        // Source: https://github.com/gubicsz/Solitaire       
-
-        if (tweenScale == null)
-            tweenScale = transform
-                .DOScaleX(0f, FlipAnimationDuration)
-                .SetLoops(2, LoopType.Yoyo)
-                .SetEase(Ease.Linear)
-                .SetAutoKill(false)
-                .OnStepComplete(() => Flip(isFaceUp))
-                .OnComplete(() => CardFlipped());
-        else
-            tweenScale.Restart();
-
-        yield return tweenScale.WaitForCompletion();
-    }
-
-    private void Flip(bool isFaceUp)
-    {
-        // Flips the card, depending on which side is currently facing up.
-        back.gameObject.SetActive(isFaceUp);
-        front.gameObject.SetActive(!isFaceUp);
-    }
-
-    private void CardFlipped()
-    {
-        // Switches the 'isFaceUp' value.
-        isFaceUp = !isFaceUp;
-    }
-
-
-    private void OnPlayerMoveComplete()
-    {
-        Debug.Log("Player Card moved");
-        //transform.position += playerCardMovement;
-        Debug.Log(transform.position);
-    }
-
-    private void OnComputerMoveComplete()
-    {
-        Debug.Log("Computer Card moved");
-        //transform.position += computerCardMovement;
-        Debug.Log(transform.position);
     }
 }
