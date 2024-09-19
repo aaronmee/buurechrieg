@@ -14,14 +14,14 @@ public class CardAnimated : MonoBehaviour
     private SpriteRenderer front;
 
 
-    private static readonly Vector3 playerPilePosition = new Vector3(-4, 0, 0);
-    private static readonly Vector3 computerPilePosition = new Vector3(4, 0, 0);
+    public static readonly Vector3 playerPilePosition = new Vector3(-4, 0, 0);
+    public static readonly Vector3 computerPilePosition = new Vector3(4, 0, 0);
 
-    private static readonly Vector3 playerCardMovePosition = new Vector3(-1.4f, 0.8f, 0f);
-    private static readonly Vector3 computerCardMovePosition = new Vector3(1.4f, 0.8f, 0f);
+    public static readonly Vector3 playerCardMovePosition = new Vector3(-1.4f, 0.8f, 0f);
+    public static readonly Vector3 computerCardMovePosition = new Vector3(1.4f, 0.8f, 0f);
 
-    private const float MoveAnimationDuration = 0.7f;
-    private const float FlipAnimationDuration = 0.35f;
+    public const float MoveAnimationDuration = 0.7f;
+    public const float FlipAnimationDuration = 0.35f;
 
 
     [SerializeField] private bool ownerIsPlayer;
