@@ -24,12 +24,7 @@ public class GameManager: MonoBehaviour
     public List<Card> computerPile;
 
 
-    public static GameManager Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
+   
 
     public static Vector3 GetPlayerDeckPosition()
     {
