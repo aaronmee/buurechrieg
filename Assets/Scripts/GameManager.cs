@@ -27,7 +27,7 @@ public class GameManager: MonoBehaviour
     public Vector3 staticAdder = new(0f, 0.7f, -1f);
 
 
-    void definePlayerAttribute()
+    public void definePlayerAttribute()
     {
         //for every card in playerPile the attribute owner gets true.
         foreach (Card card in playerPile)
@@ -37,7 +37,7 @@ public class GameManager: MonoBehaviour
 
     }
 
-    void definePlayerAttributeActivecards()
+    public void definePlayerAttributeActivecards()
     {
         //for every card in activeCards the attribute owner gets true.
         foreach (Card card in activeCards)
@@ -67,7 +67,7 @@ public class GameManager: MonoBehaviour
         }
 
     }
-    void Shuffle<T>(List<T> list)
+    public void Shuffle<T>(List<T> list)
     {
         // Used chatgpt to create this function.
         // Shuffles a given list of GameObjects/Scripts.
@@ -254,11 +254,11 @@ public class GameManager: MonoBehaviour
         }
     }
 
-    private static readonly Vector3 playerDeckPosition = new Vector3(7, 0, 0);
-    private static readonly Vector3 computerDeckPosition = new Vector3(-7, 0, 0);
+    public static readonly Vector3 playerDeckPosition = new Vector3(7, 0, 0);
+    public static readonly Vector3 computerDeckPosition = new Vector3(-7, 0, 0);
 
-    private static readonly Vector3 playerPilePosition = new Vector3(2.5f, 0f, 0f);
-    private static readonly Vector3 computerPilePosition = new Vector3(-2.5f, 0f, 0f);
+    public static readonly Vector3 playerPilePosition = new Vector3(2.5f, 0f, 0f);
+    public static readonly Vector3 computerPilePosition = new Vector3(-2.5f, 0f, 0f);
 
 
     private Tweener tweenScale;
