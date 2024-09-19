@@ -14,11 +14,9 @@ public class  TutorialUI: MonoBehaviour
 
     private void Awake()
     {
+        // Exit the Application or go back to the Main Menu when Buttons are clicked
         backButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenuScene"));
         exitButton.onClick.AddListener(() => Application.Quit());
     }
-
-
-
 
 }
