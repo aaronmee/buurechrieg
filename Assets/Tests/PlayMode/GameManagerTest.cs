@@ -10,12 +10,14 @@ public class GameManagerTest
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.
     [UnityTest]
-    public IEnumerator Shuffle()
+    public IEnumerator cardPlayerTest()
     {
         // Use the Assert class to test conditions.
         // Use yield to skip a frame.
-        var gameObject = new GameObject();
-        var card =gameObject.AddComponent<Card>();
-        yield return null;
+        Card card = new Card();
+        card.cardData.owner = true;
+        List<Card> cards = new List<Card>();
+        cards.Add(card);
+        Assert.AreEqual(card.cardData.owner, true, GameManager.definePlayerAttribute(cards));
     }
 }

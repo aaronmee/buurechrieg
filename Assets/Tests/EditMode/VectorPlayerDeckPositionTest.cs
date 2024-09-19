@@ -8,7 +8,7 @@ public class VectorTest
 {
     // A Test behaves as an ordinary method
     [Test]
-    public void MixCardstestSimplePasses()
+    public void VectorPlayerDeckPositionTest()
     {
         // Use the Assert class to test conditions
         Assert.AreEqual(expected: new Vector3(x: 7, y: 0, z:0), actual: GameManager.playerDeckPosition);
