@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Threading;
+using System.Diagnostics.Tracing;
+using System;
 
 
 public class GameManager: MonoBehaviour
@@ -26,6 +28,18 @@ public class GameManager: MonoBehaviour
     public Vector3 normalHeight = new (0f, 0f, 0f);
     public Vector3 staticAdder = new(0f, 0.7f, -1f);
 
+    public event EventHandler OnPlayerVictory;
+    public event EventHandler OnPlayerDefeat;
+
+
+    public static GameManager Instance;
+
+
+    private void Awake()
+    {
+        // Set this object as Instance
+        Instance = this;
+    }
 
 
     public void definePlayerAttribute()
@@ -207,12 +221,14 @@ public class GameManager: MonoBehaviour
             // checks if the player lost the game and manipulates the boolean gameLost accordingly
             gameLost = true;
             Debug.Log("Player lost the Game");
+            OnPlayerVictory?.Invoke(this, EventArgs.Empty);
         }
         if (computerPile.Count == 0)
         {
             // checks if the player won the game and manipulates the boolean gameWon accordingly
             gameWon = true;
             Debug.Log("Player won the Game");
+            OnPlayerDefeat?.Invoke(this, EventArgs.Empty);
         }
         // A function that compares the top card of the players deck with the top card of the computers deck and
         // decides if the player was higher, if the computer was higher or if it was a draw. In case of a draw it
