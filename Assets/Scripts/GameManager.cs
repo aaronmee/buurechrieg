@@ -24,6 +24,19 @@ public class GameManager: MonoBehaviour
     public List<Card> computerPile;
 
 
+    public static GameManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public static Vector3 GetPlayerDeckPosition()
+    {
+        return playerDeckPosition;
+    }
+
+
     public void definePlayerAttribute()
     {
         //for every card in playerPile the attribute owner gets true.
