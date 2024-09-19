@@ -24,13 +24,6 @@ public class GameManager: MonoBehaviour
     public List<Card> computerPile;
 
 
-   
-
-    public static Vector3 GetPlayerDeckPosition()
-    {
-        return playerDeckPosition;
-    }
-
 
     public void definePlayerAttribute()
     {
