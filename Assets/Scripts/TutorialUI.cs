@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class  TutorialUI: MonoBehaviour
 {
+
     [SerializeField] private Button exitButton;
     [SerializeField] private Button backButton;
 
@@ -13,14 +14,8 @@ public class  TutorialUI: MonoBehaviour
 
     private void Awake()
     {
-        backButton.onClick.AddListener(() =>
-        {
-            SceneManager.LoadScene("MainMenuScene");
-        });
-        exitButton.onClick.AddListener(() =>
-        {
-            Application.Quit();
-        });
+        backButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenuScene"));
+        exitButton.onClick.AddListener(() => Application.Quit());
     }
 
 
