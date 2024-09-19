@@ -1584,8 +1584,9 @@ GameObject:
   - component: {fileID: 721773589}
   - component: {fileID: 721773588}
   - component: {fileID: 721773587}
+  - component: {fileID: 721773590}
   m_Layer: 5
-  m_Name: Exit
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1607,8 +1608,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 945.4998, y: 525}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 940, y: 520}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &721773587
 MonoBehaviour:
@@ -1692,6 +1693,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721773585}
   m_CullTransparentMesh: 1
+--- !u!114 &721773590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721773585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &769385532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3426,8 +3442,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2045665340}
-  - {fileID: 1849085504}
   - {fileID: 721773586}
+  - {fileID: 1849085504}
   m_Father: {fileID: 1906658584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
@@ -3449,6 +3465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCardCounterText: {fileID: 1353683484}
   computerCardCounterText: {fileID: 38092835}
+  exitButton: {fileID: 721773587}
+  backButton: {fileID: 1849085505}
 --- !u!1001 &1772136100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4084,8 +4102,9 @@ GameObject:
   - component: {fileID: 1849085507}
   - component: {fileID: 1849085506}
   - component: {fileID: 1849085505}
+  - component: {fileID: 1849085508}
   m_Layer: 5
-  m_Name: "Zur\xFCck"
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4105,10 +4124,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1752696925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -110, y: -15}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 838, y: 520}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1849085505
 MonoBehaviour:
@@ -4192,6 +4211,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849085503}
   m_CullTransparentMesh: 1
+--- !u!114 &1849085508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849085503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &1882590874
 PrefabInstance:
   m_ObjectHideFlags: 0

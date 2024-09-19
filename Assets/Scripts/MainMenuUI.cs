@@ -17,24 +17,13 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
-        singlePlayerButton.onClick.AddListener(() => {
-            SceneManager.LoadScene("GameScene");
-        });
+        singlePlayerButton.onClick.AddListener(() => SceneManager.LoadScene("GameScene"));
 
-        multiPlayerButton.onClick.AddListener(() =>
-        {
-            Debug.Log("Coming soon!");
-        });
+        multiPlayerButton.onClick.AddListener(() => Debug.Log("Coming soon!"));
 
-        tutorialButton.onClick.AddListener(() =>
-        {
-            SceneManager.LoadScene("TutorialScene");
-        });
+        tutorialButton.onClick.AddListener(() => SceneManager.LoadScene("TutorialScene"));
 
-        exitButton.onClick.AddListener(() =>
-        {
-            Application.Quit();
-        });
+        exitButton.onClick.AddListener(() => Application.Quit());
 
         Application.targetFrameRate = 60;
     }
