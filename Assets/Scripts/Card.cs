@@ -33,6 +33,9 @@ public class Card : MonoBehaviour
 
     private void Awake()
     {
+        //Function that is called before the game starts. 
+        //It is used to define certain Variables or move
+        //things befor the player sees them
         Transform transform = gameObject.transform;
         isFaceUp = false;
         back.gameObject.SetActive(false);
