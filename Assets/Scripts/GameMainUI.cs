@@ -19,31 +19,28 @@ public class GameMainUI : MonoBehaviour
 
     private void Awake()
     {
+        // Set starting value
         playerCardCounterText.text = "16 Karten";
         computerCardCounterText.text = "16 Karten";
 
+        // Exit the Application or go back to the Main Menu when Buttons are clicked
         exitButton.onClick.AddListener(() => Application.Quit());
         backButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenuScene"));
 
-        // GameManager.Instance.OnPlayerVictory += ...
-        // GameManager.Instance.OnPlayerDefeat += ...
     }
 
     void Update()
     {
-        //playerCardCounterText.text = GameManager.Instance.playerPile.Count + " Karten";
-        //computerCardCounterText.text = GameManager.Instance.computerPile.Count + " Karten";
-    }
+        // Update the card counters
+        playerCardCounterText.text = GameManager.Instance.playerPile.Count + " Karten";
+        computerCardCounterText.text = GameManager.Instance.computerPile.Count + " Karten";
 
+        // Disable the back button if someone won
+        if (GameManager.Instance.playerPile.Count == 0 || GameManager.Instance.computerPile.Count == 0)
+        {
+            backButton.gameObject.SetActive(false);
+        }
 
-    private void OnPlayerVictory()
-    {
-        backButton.gameObject.SetActive(false);
-    }
-
-    private void OnPlayerDefeat()
-    {
-        backButton.gameObject.SetActive(false);
     }
 
 
