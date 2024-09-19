@@ -1,12 +1,3 @@
 # buurechrieg
-Buurechrieg mit Unity
 
-Moritz Pushed
-
-Milan Pushed
-
-Eliane Pushed
-
-VS2 Pushed
-
-Noe Pushed & formatted :)
+A traditional swiss card game created with Unity
