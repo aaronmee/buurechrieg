@@ -13,12 +13,13 @@ public class Card : MonoBehaviour
     [SerializeField]
     private SpriteRenderer front;
 
+    private static readonly Vector3 zeroVector = new Vector3(0f, 0f, 0f);
 
-    private static readonly Vector3 playerDeckPosition = new Vector3(7, 0, 0);
-    private static readonly Vector3 computerDeckPosition = new Vector3(-7, 0, 0);
+    private static readonly Vector3 pDeckPosition = new Vector3(7f, 0f, 0f);
+    public static readonly Vector3 cDeckPosition = new Vector3(-7f, 0f, 0f);
 
-    private static readonly Vector3 playerPilePosition = new Vector3( 2.5f, 0f, 0f);
-    private static readonly Vector3 computerPilePosition = new Vector3( -2.5f, 0f, 0f);
+    private static readonly Vector3 pPilePosition = new Vector3( 2.5f, 0f, 0f);
+    public static readonly Vector3 cPilePosition = new Vector3( -2.5f, 0f, 0f);
 
 
     private const float MoveAnimationDuration = 0.7f;
@@ -37,51 +38,51 @@ public class Card : MonoBehaviour
         back.gameObject.SetActive(false);
         front.gameObject.SetActive(false);
     }
-    public void AnimatePlayerToPile()
+    public void AnimatePlayerToPile(Vector3 addVector)
     {
-        StartCoroutine(AnimatePlayerMove(playerPilePosition));
+        StartCoroutine(AnimatePlayerMove(pPilePosition, addVector));
         StartCoroutine(AnimateFlip());
     }
     public void AnimatePlayerToDeck()
     {
-        StartCoroutine(AnimatePlayerMove(playerDeckPosition));
+        StartCoroutine(AnimatePlayerMove(pDeckPosition, zeroVector));
         StartCoroutine(AnimateFlip());
     }
-    public void AnimatePlayerToPileDraw()
+    public void AnimatePlayerToPileDraw(Vector3 addVector)
     {
         cardData.isTribut = true;
-        StartCoroutine(AnimatePlayerMove(playerPilePosition));
+        StartCoroutine(AnimatePlayerMove(pPilePosition, addVector));
     }
     public void AnimatePlayerToDeckDraw()
     {
         cardData.isTribut = false;
-        StartCoroutine(AnimatePlayerMove(playerDeckPosition));
+        StartCoroutine(AnimatePlayerMove(pDeckPosition, zeroVector));
     }
-    public void AnimateComputerToPile()
+    public void AnimateComputerToPile(Vector3 addVector)
     {
-        StartCoroutine(AnimateComputerMove(computerPilePosition));
+        StartCoroutine(AnimateComputerMove(cPilePosition, addVector));
         StartCoroutine(AnimateFlip());
     }
     public void AnimateComputerToDeck()
     {
-        StartCoroutine(AnimateComputerMove(computerDeckPosition));
+        StartCoroutine(AnimateComputerMove(cDeckPosition, zeroVector));
         StartCoroutine(AnimateFlip());
     }
-    public void AnimateComputerToPileDraw()
+    public void AnimateComputerToPileDraw(Vector3 addVector)
     {
         cardData.isTribut = true;
-        StartCoroutine(AnimateComputerMove(computerPilePosition));
+        StartCoroutine(AnimateComputerMove(cPilePosition, addVector));
 
     }
     public void AnimateComputerToDeckDraw()
     {
         cardData.isTribut = false;
-        StartCoroutine(AnimateComputerMove(computerDeckPosition));
+        StartCoroutine(AnimateComputerMove(cDeckPosition, zeroVector));
     }
 
-    private IEnumerator AnimatePlayerMove(Vector3 position)
+    private IEnumerator AnimatePlayerMove(Vector3 position, Vector3 addVector)
     {
-
+        position = position + addVector;
         if (tweenMove == null)
             tweenMove = transform
                 .DOMove(position, MoveAnimationDuration)
@@ -95,9 +96,9 @@ public class Card : MonoBehaviour
         yield return tweenMove.WaitForCompletion();
     }
 
-    private IEnumerator AnimateComputerMove(Vector3 position)
+    private IEnumerator AnimateComputerMove(Vector3 position, Vector3 addVector)
     {
-
+        position = position + addVector;
         if (tweenMove == null)
             tweenMove = transform
                 .DOMove(position, MoveAnimationDuration)
