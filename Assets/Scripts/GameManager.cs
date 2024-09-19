@@ -22,6 +22,9 @@ public class GameManager: MonoBehaviour
     [SerializeField] public List<Card> cardPile;
     public List<Card> playerPile;
     public List<Card> computerPile;
+    public Vector3 heightener = new (0f, 0f, 0f);
+    public Vector3 normalHeight = new (0f, 0f, 0f);
+    public Vector3 staticAdder = new(0f, 0.7f, -1f);
 
 
     public void definePlayerAttribute()
@@ -107,10 +110,12 @@ public class GameManager: MonoBehaviour
             Thread.Sleep(animationDelay);
             if (card.cardData.isTribut)
             {
+                InitPosition(card.cardData.owner, card);
                 card.AnimateComputerToDeckDraw();
             }
             else
             {
+                InitPosition(card.cardData.owner, card);
                 card.AnimateComputerToDeck();
             }
         }
@@ -127,10 +132,13 @@ public class GameManager: MonoBehaviour
             Thread.Sleep(animationDelay);
             if (card.cardData.isTribut)
             {
+                InitPosition(card.cardData.owner, card);
                 card.AnimatePlayerToDeckDraw();
+
             }
             else 
             {
+                InitPosition(card.cardData.owner, card);
                 card.AnimatePlayerToDeck();
             }
         }
@@ -171,9 +179,22 @@ public class GameManager: MonoBehaviour
             if (!hasClicked)
             {
                 // if it has been more than 3 seconds since the player pressed the spacebar, the function compare gets called.
-                playerPile[0].AnimatePlayerToPile();
-                computerPile[0].AnimateComputerToPile();
+                if (isDraw)
+                {
+                    playerPile[0].AnimatePlayerToPile(heightener);
+                    InitPositionPile(playerPile[0].cardData.owner, playerPile[0]);
+                    computerPile[0].AnimateComputerToPile(heightener);
+                    InitPositionPile(computerPile[0].cardData.owner, computerPile[0]);
+                }
+                else
+                {
+                    playerPile[0].AnimatePlayerToPile(normalHeight);
+                    InitPositionPile(playerPile[0].cardData.owner, playerPile[0]);
+                    computerPile[0].AnimateComputerToPile(normalHeight);
+                    InitPositionPile(computerPile[0].cardData.owner, computerPile[0]);
+                }
                 Compare();
+
             }
         }
     }
@@ -205,6 +226,8 @@ public class GameManager: MonoBehaviour
             {
                 Debug.Log("Player Won comparison");
                 playerWon = true;
+                isDraw = false;
+                heightener = heightener - heightener;
                 SaveActiveCards();
                 AddCardsToWinnerPlayer();
             }
@@ -212,6 +235,7 @@ public class GameManager: MonoBehaviour
             {
                 Debug.Log("Player lost comparison");
                 playerWon = false;
+                isDraw = false;
                 SaveActiveCards();
                 AddCardsToWinnerComputer();
             }
@@ -219,9 +243,12 @@ public class GameManager: MonoBehaviour
             {
                 Debug.Log("It was a Draw");
                 isDraw = true;
+                heightener = heightener + staticAdder;
                 SaveActiveCards();
-                playerPile[0].AnimatePlayerToPileDraw();
-                computerPile[0].AnimatePlayerToPileDraw();
+                playerPile[0].AnimatePlayerToPileDraw(heightener);
+                InitPositionPile(playerPile[0].cardData.owner, playerPile[0]);
+                computerPile[0].AnimatePlayerToPileDraw(heightener);
+                InitPositionPile(computerPile[0].cardData.owner, computerPile[0]);
                 SaveActiveCards();
             }
         }
@@ -239,6 +266,19 @@ public class GameManager: MonoBehaviour
     private bool isFaceUp;
 
     public void InitPosition(bool ownerIsPlayer, Card card)
+    {
+        // Sets the card's potition, depending on who the owner is
+        switch (ownerIsPlayer)
+        {
+            case true:
+                card.transform.position = playerDeckPosition;
+                break;
+            case false:
+                card.transform.position = computerDeckPosition;
+                break;
+        }
+    }
+    public void InitPositionPile(bool ownerIsPlayer, Card card)
     {
         // Sets the card's potition, depending on who the owner is
         switch (ownerIsPlayer)
